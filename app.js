@@ -1,8 +1,17 @@
-const http = require('http');
+const express = require('express')
+const app = express()
+const port = 3000
+ 
+app.get('/', (req, res) => {
+  res.send('Home Page')
+})
 
-const server = http.createServer( (req, resp) => {
-  resp.write('Hola Mundo');
-  resp.end();
-}).listen(8085);
+app.get('/hola-mundo', (req, res) => {
+  res.send('Hola mundo en su repectiva ruta')
+})
 
-console.log('Escuchando el puerto 8085...');
+app.get('*', (req, res) => {
+  res.send('404 | Page not found')
+})
+ 
+app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
